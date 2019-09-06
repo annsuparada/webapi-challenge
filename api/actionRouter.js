@@ -57,19 +57,21 @@ router.put('/:id', (req, res) => {
 //remove()
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-    if(!id) {
-        res.status(404).json({ errorMessage: 'id not found'})
-    }  else {
         db.remove(id) 
         .then(response => {
-            res.status(200).json({message: 'the action was deleted.'})
+            if(response && response > 0) {
+                res.status(200)
+                .json({message: 'the action was deleted.'})
+            } else {
+                res.status(404)
+                .json({ message: 'The item with the specified ID does not exist.' })
+            }
         })
         .catch(() => {
             res
             .status(500)
-            .json({ errorMessage: 'The user could not be removed' })
+            .json({ errorMessage: 'The action could not be removed' })
         })
-    }
 })
 
 
