@@ -30,13 +30,12 @@ router.post('/', validateAction, (req, res) => {
     .catch(err => {
         console.log(err)
         res.status(500)
-        .json({errorMessage: 'There was an error while saving the user to the database'})
+        .json({errorMessage: 'There was an error while saving the action to the database'})
     })
 })
 
 //update()
 router.put('/:id', (req, res) => {
-    
     const  id  = req.params.id;
     const  change  = req.body;
     if(!id) {
@@ -49,11 +48,11 @@ router.put('/:id', (req, res) => {
         .catch(err => {
             console.log(err)
             res.status(500)
-            .json({errorMessage: 'There was an error while saving the user to the database'})
+            .json({errorMessage: 'There was an error while saving the action to the database'})
         })
     }
-    
 })
+
 //remove()
 router.delete('/:id', (req, res) => {
     const id = req.params.id
